@@ -9,7 +9,7 @@ namespace DeviceService.Api
         public static IServiceCollection AddDeviceServices(this IServiceCollection services)
             => services
                 .AddDbContext<DeviceDbContext>(
-                    options => options.UseSqlServer("name=ConnectionStrings:WarehouseDB"))
+                    options => options.UseSqlServer("name=ConnectionStrings:DeviceDb"))
                 .AddDeviceServices();
 
         public static IEndpointRouteBuilder UseWarehouseEndpoints(this IEndpointRouteBuilder endpoints)

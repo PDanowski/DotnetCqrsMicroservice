@@ -17,11 +17,11 @@ namespace DeviceService.Api.UseCases
                         [FromQuery] string? filter,
                         [FromQuery] int? page,
                         [FromQuery] int? pageSize,
-                        CancellationToken ct
+                        CancellationToken cancellationToken
                     ) =>
                     {
                         var query = GetDevices.From(filter, page, pageSize);
-                        var result = await devices.Query(query, ct);
+                        var result = await devices.Query(query, cancellationToken);
                         return Ok(result);
                     })
                 .Produces<IReadOnlyList<Device>>()

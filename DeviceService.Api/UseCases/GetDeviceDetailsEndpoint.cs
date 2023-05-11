@@ -14,11 +14,11 @@ namespace DeviceService.Api.UseCases
                     async (
                         IQueryable<Device> queryable,
                         Guid id,
-                        CancellationToken ct
+                        CancellationToken cancellationToken
                     ) =>
                     {
                         var query = GetDeviceDetails.From(id);
-                        var result = await queryable.Query(query, ct);
+                        var result = await queryable.Query(query, cancellationToken);
                         return result != null ? Ok(result) : NotFound();
                     })
                 .Produces<Device?>()

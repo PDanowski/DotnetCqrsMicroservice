@@ -14,7 +14,7 @@ namespace DeviceService.Api.UseCases
                     async (
                         DeviceDbContext dbContext,
                         RegisterDeviceRequest request,
-                        CancellationToken ct
+                        CancellationToken cancellationToken
                     ) =>
                     {
                         var (name, description, firmwareVersion, profileName) = request;
@@ -24,7 +24,7 @@ namespace DeviceService.Api.UseCases
                             dbContext.AddAndSave,
                             dbContext.DevicesWithGivenProfile,
                             command,
-                            ct
+                            cancellationToken
                         );
                         return Created($"/api/devices/{deviceId}", deviceId);
                     })
