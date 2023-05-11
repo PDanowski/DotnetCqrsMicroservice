@@ -16,8 +16,6 @@ namespace DeviceService.Api.Tests
                 services
                     .AddTransient(s =>
                     {
-                        var connectionString = s.GetRequiredService<IConfiguration>()
-                            .GetConnectionString("DeviceDb");
                         var options = new DbContextOptionsBuilder<DeviceDbContext>();
                         options.UseInMemoryDatabase($"DevicesDb");
                         return options.Options;
