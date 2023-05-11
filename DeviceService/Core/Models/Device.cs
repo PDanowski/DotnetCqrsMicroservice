@@ -30,5 +30,7 @@ namespace DeviceService.Core.Models
             Name = name;
             Description = description;
         }
+
+        private Device() { }
     }
 }

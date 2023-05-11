@@ -6,7 +6,7 @@ namespace DeviceService.Persistence
 {
     public static class Configuration
     {
-        public static IServiceCollection AddDeviceServices(this IServiceCollection services)
+        public static IServiceCollection ConfigureDbContext(this IServiceCollection services)
             => services
                 .AddTransient(sp =>
                     sp.GetRequiredService<DeviceDbContext>().Set<Device>().AsNoTracking()
@@ -24,8 +24,7 @@ namespace DeviceService.Persistence
                     plain => new DeviceId(plain)
                 );
 
-            device
-                .OwnsOne(e => e.DeviceProfile);
+            device.OwnsOne(e => e.DeviceProfile);
         }
     }
 }
