@@ -23,7 +23,7 @@ namespace DeviceService.Api.Tests.UseCases
         public Task ValidRequest_With_Filter_ShouldReturn_SubsetOfRecords()
         {
             var registeredDevice = API.RegisteredDevices.First();
-            var filter = registeredDevice.Profile[1..];
+            var filter = registeredDevice.Profile;
 
             return API.Given(URI($"/api/Devices/?filter={filter}"))
                 .When(GET)
@@ -87,8 +87,8 @@ namespace DeviceService.Api.Tests.UseCases
 
                 var createdId = registerResponse.GetCreatedId<Guid>();
 
-                var (name, description, firmware, profileName) = registerDevice;
-                RegisteredDevices.Add(new DeviceListItem(createdId, firmware + profileName, name!));
+                var (name, _, firmware, profileName) = registerDevice;
+                RegisteredDevices.Add(new DeviceListItem(createdId, $"{profileName}_{firmware}", name!));
             }
         }
 

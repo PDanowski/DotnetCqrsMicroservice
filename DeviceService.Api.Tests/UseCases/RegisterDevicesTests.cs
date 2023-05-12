@@ -52,14 +52,13 @@ namespace DeviceService.Api.Tests.UseCases
         public static TheoryData<RegisterDeviceRequest> ValidRequests = new()
         {
             new RegisterDeviceRequest(ValidName, ValidDescription, ValidVersion, ValidProfileName),
-            new RegisterDeviceRequest(ValidName, ValidDescription, ValidVersion,  null!)
+             new RegisterDeviceRequest(ValidName, null!, ValidVersion, ValidProfileName)
         };
 
         public static TheoryData<RegisterDeviceRequest> InvalidRequests = new()
         {
             new RegisterDeviceRequest(null!, ValidDescription, ValidVersion, ValidProfileName),
             new RegisterDeviceRequest(ValidName, ValidDescription, null!, ValidProfileName),
-            new RegisterDeviceRequest(ValidName, null!, ValidVersion, ValidProfileName),
             new RegisterDeviceRequest(ValidName, ValidDescription, ValidVersion, null!),
         };
     }

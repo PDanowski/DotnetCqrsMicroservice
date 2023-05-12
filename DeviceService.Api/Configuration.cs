@@ -12,17 +12,18 @@ namespace DeviceService.Api
                     options => options.UseSqlServer("name=ConnectionStrings:DeviceDb"))
                 .ConfigureDbContext();
 
-        public static IEndpointRouteBuilder UseWarehouseEndpoints(this IEndpointRouteBuilder endpoints)
+        public static IEndpointRouteBuilder UseDevicesServiceEndpoints(this IEndpointRouteBuilder endpoints)
             => endpoints.UseDevicesEndpoints();
 
-        public static IApplicationBuilder ConfigureWarehouse(this IApplicationBuilder app)
+        public static IApplicationBuilder ConfigureDevicesService(this IApplicationBuilder app, IConfiguration configuration)
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+            var isTest = configuration.GetValue<bool>("UseInMemoryDb");
 
-            if (environment == "Development")
+            if (environment == "Development" && !isTest)
             {
                 app.ApplicationServices.CreateScope().ServiceProvider
-                    .GetRequiredService<DeviceDbContext>().Database.Migrate();
+                    .GetRequiredService<DeviceDbContext>().Database.Migrate(); 
             }
 
             return app;

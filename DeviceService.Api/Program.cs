@@ -15,9 +15,9 @@ app.UseExceptionHandlingMiddleware()
     .UseRouting()
     .UseEndpoints(endpoints =>
     {
-        endpoints.UseWarehouseEndpoints();
+        endpoints.UseDevicesServiceEndpoints();
     })
-    .ConfigureWarehouse()
+    .ConfigureDevicesService(app.Configuration)
     .UseSwagger()
     .UseSwaggerUI();
 

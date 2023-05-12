@@ -49,7 +49,7 @@ namespace DeviceService.Api.Tests.UseCases
             await CREATED(registerResponse);
 
             var (name, description, version, profileName) = registerDevice;
-            ExistingDevice = new DeviceDetails(registerResponse.GetCreatedId<Guid>(), profileName + version, name!, description);
+            ExistingDevice = new DeviceDetails(registerResponse.GetCreatedId<Guid>(), $"{profileName}_{version}", name!, description);
         }
 
         public Task DisposeAsync() => Task.CompletedTask;

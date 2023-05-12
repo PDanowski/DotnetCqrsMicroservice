@@ -14,7 +14,6 @@ namespace DeviceService.Core
                 ? value.Value
                 : throw new ArgumentException(argumentName);
 
-
         public static string AssertNotEmpty(
             [NotNull] this string? value,
             [CallerArgumentExpression("value")] string? argumentName = null
@@ -23,29 +22,10 @@ namespace DeviceService.Core
                 ? value
                 : throw new ArgumentException(argumentName);
 
-
         public static string? AssertNullOrNotEmpty(
             this string? value,
             [CallerArgumentExpression("value")] string? argumentName = null
         ) => value?.AssertNotEmpty(argumentName);
-
-        public static string AssertMatchesRegex(
-            [NotNull] this string? value,
-            [StringSyntax(StringSyntaxAttribute.Regex)]
-        string pattern,
-            [CallerArgumentExpression("value")] string? argumentName = null
-        )
-        {
-            return Regex.IsMatch(value.AssertNotEmpty(), pattern)
-                ? value
-                : throw new ArgumentOutOfRangeException(argumentName);
-        }
-
-        public static int AssertPositive(
-            [NotNull] this int? value,
-            [CallerArgumentExpression("value")] string? argumentName = null
-        ) =>
-            value?.AssertPositive() ?? throw new ArgumentOutOfRangeException(argumentName);
 
         public static int AssertPositive(
             this int value,
